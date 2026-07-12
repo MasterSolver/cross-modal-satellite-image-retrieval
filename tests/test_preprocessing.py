@@ -1,4 +1,4 @@
-from preprocessing import *
+from utils.preprocessing import *
 from pathlib import Path
 
 image_path = Path(r"data\BEN-14K\benv1_14k\s2\S2A_MSIL2A_20170803T094031_28_15")
