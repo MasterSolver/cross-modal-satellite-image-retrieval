@@ -1,6 +1,7 @@
 torch
 torchvision
 timm
+transformers
 
 numpy
 pandas
