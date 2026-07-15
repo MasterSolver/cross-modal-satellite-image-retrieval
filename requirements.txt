@@ -2,6 +2,7 @@ torch
 torchvision
 timm
 transformers
+tqdm
 
 numpy
 pandas
