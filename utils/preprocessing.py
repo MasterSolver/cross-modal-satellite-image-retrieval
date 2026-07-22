@@ -80,6 +80,35 @@ def normalize_tensor(tensor: torch.Tensor, modality: str) -> torch.Tensor:
     tensor = torch.clamp(tensor, min = 0, max = 1)
     return tensor
 
+def preview(folder_path: Path, modality: str) -> np.ndarray:
+
+    image = load_sample(folder_path, modality)
+
+    image = image.astype(np.float32)
+
+    if modality == Modality.SENTINEL_2:
+
+        # Channels are [R, G, B]
+        for i in range(3):
+            band = image[i]
+
+            p2 = np.percentile(band, 2)
+            p98 = np.percentile(band, 98)
+
+            band = np.clip(band, p2, p98)
+            band = (band - p2) / (p98 - p2 + 1e-6)
+
+            image[i] = band
+
+    else:
+        image = (image + 40) / 50
+        image = np.clip(image, 0, 1)
+
+    tensor = torch.from_numpy(image).float()
+    tensor = resize_tensor(tensor)
+
+    return tensor.permute(1, 2, 0).numpy()
+
 def preprocess(folder_path: Path, modality: str) -> torch.Tensor:
     image = load_sample(folder_path, modality)
     tensor = to_tensor(image)

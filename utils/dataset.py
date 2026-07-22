@@ -25,4 +25,4 @@ class BEN14KDataset (Dataset):
         s1_tensor = self.preprocessing(s1_path, Modality.SENTINEL_1)
         s2_tensor = self.preprocessing(s2_path, Modality.SENTINEL_2)
 
-        return s1_tensor, s2_tensor, labels
+        return s1_tensor, s2_tensor, labels, str(s1_path), str(s2_path)

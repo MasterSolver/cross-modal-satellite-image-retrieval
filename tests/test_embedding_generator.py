@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     dataset = BEN14KDataset(Path(r"data\BEN-14K\benv1_14k\benv1_14k_dataset_master_labels.csv"), Path(r"data\BEN-14K\benv1_14k\s1"), Path(r"data\BEN-14K\benv1_14k\s2"), preprocess)
 
-    embeddings = generate_embeddings(dataset, Modality.SENTINEL_2, model, device)
+    embeddings = generate_embeddings(dataset, Modality.SENTINEL_1, model, device)
 
     print(embeddings.shape)
     print(embeddings.dtype)
